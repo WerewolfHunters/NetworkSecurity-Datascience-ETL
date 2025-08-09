@@ -4,4 +4,4 @@ pandas
 pymongo
 certifi
 
--e .
+# -e .
