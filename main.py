@@ -8,7 +8,8 @@ from src.entity.config_entity import TrainingPipelineConfig
 
 # from networksecurity.components.model_trainer import ModelTrainer
 # from networksecurity.entity.config_entity import ModelTrainerConfig
- 
+from src.components.model_trainer import ModelTrainer
+from src.entity.config_entity import ModelTrainerConfig
 
 import sys
 
@@ -39,6 +40,13 @@ if __name__=='__main__':
         logging.info("Data Transformation Completed")
         print(data_transformation_artifact)
 
+        # Model Training & Evaluation phase
+        model_trainer_config = ModelTrainerConfig(trainingpipelineconfig)
+        model_trainer = ModelTrainer(model_trainer_config, data_transformation_artifact)
+        logging.info("Initiate the model training and evaluation")
+        model_trainer_artifact = model_trainer.initiate_model_trainer()
+        logging.info("Model Training and Evaluation Completed")
+        print(model_trainer_artifact)
 
     except Exception as e:
            raise NetworkSecurityException(e,sys)
